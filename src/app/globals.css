@@ -165,4 +165,7 @@
     -webkit-appearance: none;
     margin: 0;
   }
+  .leaflet-container {
+    z-index: 0 !important;
+  }
 }

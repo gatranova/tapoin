@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import Client from "@/client/home";
 
 export const metadata: Metadata = {
-  title: "Home | Tapoin",
+  title: "Register | Tapoin",
   description: "",
   openGraph: {
-    title: "Home | Tapoin",
+    title: "Register | Tapoin",
     description: "",
   },
   twitter: {
-    title: "Home | Tapoin",
+    title: "Register | Tapoin",
     description: "",
   },
 };
 
-export default function Home() {
-  return <Client />;
+export default function Register() {
+  return null;
 }
