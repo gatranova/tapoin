@@ -3,10 +3,12 @@
 import { Mic, Send } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
+import { useSidebar } from "@/context/sidebar";
 import { Chat } from "@/services/chat";
 import dynamic from "next/dynamic";
 
 export default function Home() {
+  const { isOpen } = useSidebar();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -16,17 +18,14 @@ export default function Home() {
   });
 
   return (
-    <main className="relative flex h-screen flex-col">
+    <section className="relative flex h-screen flex-col">
       <Map position={[-7.94541935, 112.614897994517]} zoom={13} />
-      <form
-        onSubmit={(e: FormEvent<HTMLFormElement>) => Chat.submit(e, message, setLoading, setMessage)}
-        className="fixed right-0 bottom-4 left-0 z-50 flex justify-center border-t border-neutral-200 p-3 dark:border-neutral-800 dark:bg-neutral-900"
-      >
-        <fieldset className="flex w-full max-w-3xl items-center gap-2 rounded-full border border-neutral-300 bg-neutral-50 px-4 py-2 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-800 dark:focus-within:ring-blue-700">
+      <form onSubmit={(e: FormEvent<HTMLFormElement>) => Chat.submit(e, message, setLoading, setMessage)} className="fixed right-0 bottom-4 left-0 z-50 flex justify-center p-3">
+        <fieldset className={`flex w-full ${isOpen ? "max-w-xl ml-72" : "max-w-3xl"} transition-all duration-300 ease-in-out items-center gap-2 rounded-full border border-neutral-300 bg-neutral-50 px-4 py-2 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-300 dark:border-neutral-700 dark:bg-neutral-800 dark:focus-within:ring-blue-700`}>
           <input
             type="text"
             className="flex-1 bg-transparent px-4 focus:outline-none"
-            placeholder="Cari warung makanan terdekat..."
+            placeholder="Find the nearest food stall..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
@@ -38,6 +37,6 @@ export default function Home() {
           </button>
         </fieldset>
       </form>
-    </main>
+    </section>
   );
 }

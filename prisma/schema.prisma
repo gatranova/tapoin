@@ -7,14 +7,3 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
-model pengguna {
-  id_pengguna   Int      @id @default(autoincrement())
-  nama_pengguna String
-  nama_lengkap  String
-  surel         String
-  kata_sandi    String
-  foto_pengguna String
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
-}
